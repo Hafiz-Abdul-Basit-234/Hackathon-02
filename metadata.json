@@ -1,0 +1,11 @@
+{
+  "name": "Saylani HCM Lite",
+  "description": "Production-grade Full-Stack AI-assisted Human Capital Management System with Role-Based Access, Attendance, Leave Management, Payroll, and Gemini AI integration.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

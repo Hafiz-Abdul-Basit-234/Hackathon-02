@@ -1,0 +1,2099 @@
+# MASTER PROMPT — SAYLANI HCM LITE FULL-STACK AI HR MANAGEMENT SYSTEM
+
+## YOUR ROLE
+
+You are an expert Full-Stack Software Engineer, Senior Backend Developer, Database Architect, UI/UX Designer, Security Engineer, and AI Integration Specialist.
+
+Your task is to build a COMPLETE, PROFESSIONAL, PRODUCTION-READY, FULL-STACK Human Capital Management (HCM Lite) application based on the attached Saylani Hackathon Challenge Brief.
+
+You must implement the actual working application, not just a UI prototype, frontend template, static dashboard, or incomplete starter project.
+
+I am a student and I do not want to manually write code.
+
+You must independently:
+- Analyze the existing project.
+- Design the complete architecture.
+- Build the frontend.
+- Build the backend.
+- Configure MongoDB Atlas.
+- Implement authentication and authorization.
+- Implement every required module.
+- Integrate Gemini AI.
+- Connect every frontend page to the backend.
+- Implement all database operations.
+- Test the application.
+- Fix errors.
+- Provide complete setup instructions.
+
+Do not stop after creating the frontend.
+
+Do not leave important features as TODOs, placeholders, mock APIs, or buttons that do nothing.
+
+Do not ask me to manually implement code.
+
+My only expected manual configuration should be providing the MongoDB Atlas connection string and Gemini API key, plus any genuinely unavoidable deployment configuration.
+
+If you have access to terminal, filesystem, package manager, and development tools, use them to build and test the application directly.
+
+---
+
+# 1. PROJECT INFORMATION
+
+Project Name: HCM Lite
+
+Full Name: Human Capital Management Lite
+
+Project Type: Full-Stack AI-Assisted HR Management System
+
+Purpose:
+
+Build a complete web-based HR management system for three roles:
+
+1. Admin
+2. HR
+3. Employee
+
+The application must support real company data, employee management, attendance, leave management, payroll, analytics, AI assistance, announcements, notifications, and audit logging.
+
+The application must start with an empty company database.
+
+There must be no preloaded fake employees, fake attendance records, fake leave requests, fake payroll, or hardcoded dashboard statistics.
+
+Admin creates the company.
+
+HR registers employees.
+
+Employees use the application.
+
+The system generates all dashboard metrics and AI answers from actual database records.
+
+The application must follow the Saylani Hackathon challenge requirements.
+
+---
+
+# 2. IMPORTANT PROJECT RULES
+
+Follow these rules throughout development.
+
+1. Build a complete working full-stack application.
+2. Use MongoDB Atlas as the database.
+3. Use Gemini AI as the AI provider.
+4. Implement all three roles.
+5. Implement all nine modules.
+6. Implement all 25 required functionalities.
+7. Implement actual database CRUD operations.
+8. Implement server-side authentication.
+9. Implement server-side role and data-scope permissions.
+10. Implement real attendance and leave calculations.
+11. Implement payroll calculations.
+12. Implement PDF payslips.
+13. Implement database-driven dashboards.
+14. Implement Gemini AI function calling.
+15. Implement AI permission checks.
+16. Implement audit logs.
+17. Implement proper validation.
+18. Implement responsive professional UI.
+19. Implement loading, empty, success, and error states.
+20. Test all important workflows.
+
+Do not remove required functionality to simplify the project.
+
+Do not replace actual functionality with static UI.
+
+Do not claim that a feature is complete unless it actually works.
+
+---
+
+# 3. TECHNOLOGY STACK
+
+Use the following stack.
+
+## Frontend
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- Recharts
+- React Hook Form
+- Zod
+- Lucide React icons
+- Axios or a properly configured fetch client
+
+Use a modern, maintainable component architecture.
+
+## Backend
+
+- Node.js
+- Express.js
+- TypeScript
+- MongoDB Atlas
+- Mongoose
+- JWT authentication
+- bcrypt password hashing
+- Zod validation
+- Multer only if necessary for file uploads
+- PDF generation library for payslips
+- Gemini API SDK or supported official Gemini integration
+
+## Database
+
+MongoDB Atlas.
+
+Use MongoDB collections and proper references.
+
+Implement indexes for commonly queried fields.
+
+Use database aggregation pipelines for analytics where appropriate.
+
+## AI
+
+Google Gemini API.
+
+Use Gemini's supported function-calling capabilities.
+
+AI must communicate with the backend through secure server-side tools.
+
+The frontend must never call Gemini directly using a secret API key.
+
+---
+
+# 4. PROJECT ARCHITECTURE
+
+Build a clean full-stack architecture.
+
+Recommended structure:
+
+hcm-lite/
+│
+├── client/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── layouts/
+│   │   ├── pages/
+│   │   ├── dashboards/
+│   │   ├── features/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   ├── contexts/
+│   │   ├── types/
+│   │   ├── utils/
+│   │   ├── routes/
+│   │   └── main.tsx
+│   ├── public/
+│   └── package.json
+│
+├── server/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── models/
+│   │   ├── controllers/
+│   │   ├── services/
+│   │   ├── routes/
+│   │   ├── middleware/
+│   │   ├── validators/
+│   │   ├── utils/
+│   │   ├── ai/
+│   │   ├── jobs/
+│   │   ├── app.ts
+│   │   └── server.ts
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── shared/
+│   └── types/
+│
+├── .env.example
+├── README.md
+└── package.json
+
+You may improve this architecture if necessary.
+
+Keep frontend, backend, database models, business logic, and AI tools organized.
+
+Do not put all application logic inside one large file.
+
+Keep business rules in backend services.
+
+Use reusable components and reusable API services.
+
+---
+
+# 5. ENVIRONMENT CONFIGURATION
+
+Create a complete `.env.example`.
+
+Required environment variables:
+
+MONGODB_URI=
+JWT_SECRET=
+GEMINI_API_KEY=
+GEMINI_MODEL=
+PORT=5000
+CLIENT_URL=http://localhost:5173
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
+
+Use a currently supported Gemini model suitable for function calling.
+
+Do not hardcode secrets.
+
+Do not commit real API keys.
+
+Do not expose MongoDB credentials or Gemini API keys in frontend code.
+
+Do not put secrets inside VITE_ environment variables.
+
+Use server-side environment variables only.
+
+Create a configuration validation system.
+
+When a required environment variable is missing, show a clear error message explaining which configuration is missing.
+
+Never print actual secret values in logs.
+
+---
+
+# 6. FIRST-RUN SETUP
+
+The application must support a fresh installation.
+
+When MongoDB contains no company and no initial Admin:
+
+Show a professional first-run setup screen.
+
+Admin must provide:
+
+- Company name
+- Company profile information
+- Admin name
+- Admin email
+- Admin password
+- Office start time
+- Grace period
+- Weekend configuration
+- Office location
+- Office radius
+
+Create the initial Admin account securely.
+
+If ADMIN_EMAIL and ADMIN_PASSWORD are provided through environment variables, use them for initial Admin creation.
+
+Never create duplicate Admin accounts on repeated application startup.
+
+Never automatically create sample employees or sample attendance records.
+
+After setup, redirect Admin to the Admin Dashboard.
+
+If the company already exists, redirect users to the normal login page.
+
+Prevent unauthorized users from accessing first-run setup after it has been completed.
+
+Implement a safe setup status endpoint.
+
+---
+
+# 7. AUTHENTICATION MODULE — M1
+
+Implement complete authentication.
+
+Required functionality:
+
+- Login
+- Logout
+- JWT authentication
+- Password hashing
+- Change password
+- Role-based authorization
+- Account activation/deactivation
+- Password reset by authorized Admin
+- Employee temporary password
+- Forced password change on first login
+- Authentication persistence
+- Protected frontend routes
+- Protected backend routes
+- Session expiration handling
+
+Use bcrypt for password hashing.
+
+Never store plain-text passwords.
+
+JWT must contain the necessary user identity and role information.
+
+Do not trust role information supplied by the frontend.
+
+The backend must retrieve and validate the authenticated user.
+
+Implement proper authentication middleware.
+
+Implement role middleware.
+
+Implement employee data-scope middleware.
+
+All protected endpoints must enforce authorization on the server.
+
+---
+
+# 8. THREE SEPARATE DASHBOARDS
+
+Create three different dashboards with different layouts, navigation menus, permissions, and data.
+
+## A. ADMIN DASHBOARD
+
+Admin has company-level access.
+
+Admin dashboard must include:
+
+### KPI Cards
+
+- Total headcount
+- Active employees
+- Employees on probation
+- Present today
+- Employees on leave
+- Late employees
+- Company payroll cost
+- Average salary
+- Attrition year-to-date
+
+### Charts
+
+- Headcount by department
+- Attendance trends
+- Payroll cost by department
+- Salary distribution
+- Employee tenure
+- Gender distribution where data is available
+- Leave utilization
+
+### Additional Features
+
+- Company settings
+- Department management
+- Designation management
+- Leave type configuration
+- Public holidays
+- HR account management
+- Employee directory
+- Attendance overview
+- Leave overview
+- Payroll overview
+- Payroll finalization
+- Announcements
+- Audit log
+- AI assistant
+- AI dashboard summary
+
+All numbers must come from actual database aggregation.
+
+Do not hardcode dashboard metrics.
+
+## B. HR DASHBOARD
+
+HR manages people operations.
+
+### KPI Cards
+
+- Total employees
+- Present today
+- On leave today
+- Late today
+- Pending leave approvals
+- Pending attendance corrections
+- Monthly attendance rate
+
+### Charts
+
+- Attendance trends
+- Department-wise attendance
+- Absenteeism
+- Leave distribution
+- Late-comer statistics
+
+### Features
+
+- Employee registration
+- Employee editing
+- Employee directory
+- Employee search
+- Employee filters
+- Employee profile
+- CSV import
+- CSV export
+- Attendance board
+- Attendance corrections
+- Leave approval
+- Salary structure
+- Monthly payroll draft
+- Payroll review
+- Announcements
+- AI assistant
+- AI dashboard summary
+
+HR cannot finalize payroll.
+
+HR cannot change company settings.
+
+HR cannot create Admin accounts.
+
+HR cannot access the audit log.
+
+## C. EMPLOYEE DASHBOARD
+
+Employee dashboard must display only personal data.
+
+### Personal KPI Cards
+
+- Today's attendance
+- Hours worked this week
+- Late count
+- Remaining annual leave
+- Remaining sick leave
+- Remaining casual leave
+- Latest payslip
+
+### Features
+
+- Check-in
+- Check-out
+- Attendance calendar
+- Attendance history
+- Attendance correction request
+- Leave application
+- Leave cancellation
+- Leave history
+- Leave balance
+- Payslip download
+- Personal profile
+- Phone update
+- Address update
+- Announcements
+- Notifications
+- Personal AI assistant
+- Company policy questions
+
+Employee cannot:
+
+- View another employee's data
+- View another employee's salary
+- Approve leave
+- Approve attendance corrections
+- Edit salary
+- Edit role
+- Directly edit attendance records
+
+Every employee API must enforce employee ownership.
+
+---
+
+# 9. PROFESSIONAL UI/UX DESIGN
+
+Create a polished, professional, enterprise-level HR application.
+
+The UI must look like a modern SaaS product.
+
+Do not create a basic student project interface.
+
+Do not use generic unstyled HTML forms.
+
+Do not create a dashboard consisting only of cards with random numbers.
+
+## Design Direction
+
+Use:
+
+- Modern SaaS dashboard layout
+- Professional typography
+- Consistent spacing
+- Clean visual hierarchy
+- Responsive layouts
+- Reusable components
+- Professional tables
+- Clear navigation
+- Consistent icons
+- Attractive charts
+- Subtle shadows
+- Rounded cards
+- Proper color contrast
+- Smooth but restrained transitions
+
+Use a professional color palette.
+
+Suggested direction:
+
+- Deep navy or slate sidebar
+- White/light neutral dashboard background
+- Blue primary actions
+- Green success states
+- Amber warnings
+- Red destructive/error states
+
+Use Lucide icons.
+
+Use a consistent design system.
+
+## Layout
+
+Create:
+
+- Responsive sidebar
+- Top navigation
+- Breadcrumbs
+- User profile menu
+- Notifications panel
+- Search where relevant
+- Dashboard content area
+- Responsive tables
+- Modal dialogs
+- Confirmation dialogs
+- Toast notifications
+- Pagination
+- Filters
+- Empty states
+- Loading skeletons
+- Error states
+
+## Responsive Requirements
+
+Support:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+The layout must work on screens around 375px wide.
+
+Tables should become horizontally scrollable or use responsive card layouts.
+
+Forms should remain usable on mobile.
+
+Sidebar must become a mobile navigation drawer.
+
+## UI Quality
+
+Every page must have:
+
+- Correct page title
+- Relevant action buttons
+- Clear empty state
+- Loading state
+- Error handling
+- Validation messages
+- Success feedback
+
+Do not use fake data to make the interface appear populated.
+
+When the database is empty, show a useful empty state.
+
+Create a professional login page.
+
+Create a professional first-run setup page.
+
+Create separate navigation for Admin, HR, and Employee.
+
+---
+
+# 10. ORGANIZATION SETUP MODULE — M2
+
+Admin must be able to configure:
+
+## Company Settings
+
+- Company name
+- Company information
+- Office start time
+- Grace time
+- Weekend days
+- Office location
+- Office latitude
+- Office longitude
+- Office radius
+- Attendance rules
+
+Default settings:
+
+Office start: 09:00
+
+Grace period: 15 minutes
+
+Weekend: Saturday and Sunday
+
+Half-day threshold: Under 5 hours
+
+Example office radius: 150 meters
+
+These are challenge defaults and should be configurable.
+
+Store settings in MongoDB.
+
+Apply settings to new records.
+
+Do not silently modify historical records when company settings change.
+
+## Departments
+
+Implement:
+
+- Create department
+- Edit department
+- View department
+- Deactivate department
+- Department employee count
+
+## Designations
+
+Implement:
+
+- Create designation
+- Edit designation
+- View designation
+- Deactivate designation
+
+## Leave Types
+
+Implement:
+
+- Create leave type
+- Edit leave type
+- Configure yearly quota
+- Configure paid/unpaid status
+- Activate/deactivate leave type
+
+Challenge default quotas:
+
+Annual leave: 14 days
+
+Sick leave: 8 days
+
+Casual leave: 10 days
+
+Unpaid leave: Unlimited
+
+## Public Holidays
+
+Implement:
+
+- Add holiday
+- Edit holiday
+- Delete holiday
+- View holidays
+- Holiday date validation
+
+Do not assume holidays that are not configured.
+
+---
+
+# 11. EMPLOYEE MANAGEMENT MODULE — M3
+
+HR must be able to register employees.
+
+Employee registration fields:
+
+- Employee code
+- Full name
+- Email
+- Phone
+- Address
+- Department
+- Designation
+- Joining date
+- Employment status
+- Basic salary
+- Salary structure
+- Employee information
+
+Validate required fields.
+
+Employee code must be unique.
+
+Email must be unique.
+
+Validate email format.
+
+Salary must be greater than zero.
+
+Department must exist.
+
+Designation must exist.
+
+Create the employee's login account during employee registration.
+
+Generate a secure temporary password.
+
+Require password change on first login.
+
+Do not expose temporary passwords in public responses.
+
+Provide the temporary password to HR through a secure creation response or one-time display.
+
+Implement:
+
+- Employee directory
+- Server-side search
+- Filters
+- Pagination
+- Employee profile
+- Employee 360 view
+- Employee editing
+- Employee activation/deactivation
+- CSV import
+- CSV export
+
+## CSV Import
+
+Implement a real CSV import feature.
+
+Include:
+
+- File upload
+- Required-field validation
+- Unique email validation
+- Unique employee code validation
+- Department validation
+- Date validation
+- Salary validation
+- Dry-run import
+- Row-level error report
+- Import confirmation
+- Actual database insertion
+
+Dry-run must not insert records.
+
+Show row number, field, and reason for each error.
+
+Do not silently ignore invalid rows.
+
+---
+
+# 12. ATTENDANCE MODULE — M4
+
+Implement complete attendance management.
+
+## Web Check-in
+
+Employee can check in through the web application.
+
+The server must record the actual check-in timestamp.
+
+Do not trust the browser's timestamp.
+
+Create one attendance record per employee per day.
+
+If the employee attempts a second check-in for the same day, return HTTP 409.
+
+## Web Check-out
+
+Employee can check out.
+
+Calculate working duration using server timestamps.
+
+Prevent invalid checkout.
+
+Prevent duplicate checkout.
+
+## Attendance Status
+
+Implement:
+
+- Present
+- Late
+- Half day
+- Absent
+- On leave
+- Missing checkout
+
+Rules:
+
+Late after 09:15 when default office start is 09:00 and grace is 15 minutes.
+
+Half day when working duration is under 5 hours.
+
+Absent when no attendance record exists and no approved leave exists.
+
+Missing checkout when a check-in exists but checkout is missing.
+
+Apply configurable company rules.
+
+## Attendance Board
+
+HR and Admin can view attendance according to their permissions.
+
+Display:
+
+- Employee
+- Department
+- Check-in
+- Check-out
+- Working hours
+- Attendance status
+
+Implement date filters.
+
+Implement department filters.
+
+Implement attendance history.
+
+## Attendance Correction
+
+Employee can request an attendance correction.
+
+Fields:
+
+- Attendance date
+- Requested check-in
+- Requested check-out
+- Reason
+
+HR can approve or reject the correction.
+
+HR must provide a comment when required by the workflow.
+
+Record the correction.
+
+Keep a history of changes.
+
+Never allow Employee to directly modify attendance.
+
+---
+
+# 13. LEAVE MANAGEMENT MODULE — M5
+
+Implement a complete leave management workflow.
+
+## Employee Leave Application
+
+Fields:
+
+- Leave type
+- Start date
+- End date
+- Reason
+
+Validate the application.
+
+Calculate working days.
+
+Exclude configured weekends.
+
+Exclude public holidays.
+
+Validate remaining leave balance.
+
+Prevent overlapping leave.
+
+Reject invalid or insufficient-balance requests with HTTP 422.
+
+## Leave Workflow
+
+1. Employee submits leave.
+2. Request is saved as pending.
+3. HR sees the request in approval inbox.
+4. HR approves or rejects.
+5. HR adds a comment.
+6. Employee receives a notification.
+7. Employee dashboard updates.
+
+## Leave Balance
+
+Calculate leave balance from actual records.
+
+Approved leave reduces the appropriate balance.
+
+Pending leave must not be treated as approved leave.
+
+Implement:
+
+- Leave history
+- Leave calendar
+- Leave balance
+- Leave approval
+- Leave rejection
+- Leave cancellation
+- Overlap checks
+- Holiday checks
+- Working-day calculation
+
+Unpaid leave does not have a fixed quota.
+
+---
+
+# 14. PAYROLL MODULE — M6
+
+Implement a real payroll calculation system.
+
+## Salary Structure
+
+HR can configure:
+
+- Basic salary
+- HRA
+- Medical allowance
+- Other configured allowances
+
+Challenge default:
+
+Gross salary = 1.5 × basic salary
+
+HRA = 40% of basic salary
+
+Medical = 10% of basic salary
+
+Use the challenge's specified gross calculation.
+
+Do not double-count allowances.
+
+## Monthly Payroll
+
+HR can:
+
+- Select payroll month
+- Select employees
+- Generate payroll draft
+- Review salary calculations
+- Review attendance deductions
+- Review unpaid leave deductions
+- Review tax
+- Review net salary
+
+## Payroll Calculation
+
+Calculate:
+
+Gross salary.
+
+Working days.
+
+Daily salary.
+
+Absent deductions.
+
+Unpaid leave deductions.
+
+Half-day deductions.
+
+Joiner prorating.
+
+Leaver prorating.
+
+Tax.
+
+Net salary.
+
+Challenge formula:
+
+Per-day salary = Gross salary / Working days
+
+Deduct:
+
+- Absent days
+- Unpaid leave
+- Half-day deductions equal to 0.5 day
+
+Implement the challenge's illustrative annual tax slabs.
+
+Use the applicable tax calculation consistently.
+
+Clearly document whether tax is calculated annually and how the monthly payroll uses that calculation.
+
+Do not invent a different tax policy.
+
+## Payroll Finalization
+
+HR can create and review payroll drafts.
+
+Only Admin can finalize payroll.
+
+Finalized payroll must be locked.
+
+Reject modifications to finalized payroll.
+
+Return an appropriate error for attempts to edit finalized payroll.
+
+Maintain payroll history.
+
+## Payslips
+
+Generate actual PDF payslips.
+
+Include:
+
+- Company name
+- Employee name
+- Employee code
+- Payroll month
+- Basic salary
+- Allowances
+- Gross salary
+- Working days
+- Attendance deductions
+- Leave deductions
+- Tax
+- Net salary
+
+Employee can download only their own payslip.
+
+HR and Admin can access payslips according to their specified permissions.
+
+---
+
+# 15. DASHBOARDS AND ANALYTICS — M7
+
+All analytics must come from MongoDB.
+
+Use server-side calculations.
+
+Implement date filters.
+
+Implement department filters.
+
+## Required Metrics
+
+### Headcount
+
+Active and probation employees on the selected date.
+
+### Attrition
+
+Exits during the selected period divided by average headcount, using the challenge's definition.
+
+### Attendance Rate
+
+Use the challenge formula:
+
+(Present + Late + Missing Checkout + 0.5 × Half Day)
+
+divided by:
+
+(Working-day records − On Leave)
+
+Implement the specified calculation consistently.
+
+### Late Percentage
+
+Calculate late attendance relative to present and late records.
+
+### Absenteeism
+
+Absent days divided by expected working days.
+
+### Leave Utilization
+
+Approved leave days divided by quota.
+
+### Payroll Cost
+
+Calculate gross and net payroll totals by month and department.
+
+### Average Salary
+
+Calculate mean gross salary by department and designation.
+
+Do not calculate these metrics using frontend arrays of fake data.
+
+Use MongoDB aggregation or backend services.
+
+When no records exist, return zero or an appropriate empty result.
+
+Do not create fake charts.
+
+---
+
+# 16. GEMINI AI ASSISTANT — M8
+
+This is a major requirement.
+
+Integrate Gemini AI into the application.
+
+I will provide the Gemini API key.
+
+The application must work with the configured Gemini API key.
+
+Do not ask me to manually write AI integration code.
+
+## AI Architecture
+
+Frontend:
+
+AI chat interface.
+
+Backend:
+
+AI service.
+
+Gemini API:
+
+Function calling.
+
+Database:
+
+MongoDB Atlas.
+
+The AI must not directly access MongoDB.
+
+The backend must expose controlled AI tools.
+
+The AI must use the same business services and permission checks as normal API requests.
+
+## AI Chat
+
+Implement:
+
+- Chat interface
+- Message history
+- Loading indicator
+- Error handling
+- AI-generated label
+- Role-aware questions
+- Database-backed answers
+
+Example questions:
+
+How many active employees are there?
+
+Who came late this month?
+
+How many employees are on leave?
+
+What is the attendance rate?
+
+How many sick leaves do I have left?
+
+What is the total payroll cost?
+
+## REQUIRED AI TOOLS
+
+Implement backend tools:
+
+1. get_headcount
+2. get_attendance_summary
+3. get_late_comers
+4. get_leave_summary
+5. get_my_leave_balance
+6. get_payroll_summary
+7. search_employees
+
+Each tool must:
+
+- Validate arguments.
+- Authenticate the user.
+- Check role.
+- Check employee scope.
+- Call the actual backend service.
+- Return structured data.
+- Never bypass permissions.
+
+## ROLE-SPECIFIC AI
+
+### Admin AI
+
+Admin can ask questions about authorized company-level data.
+
+### HR AI
+
+HR can ask questions about authorized HR data.
+
+HR must not access company settings through AI.
+
+HR must not access audit logs through AI.
+
+HR must not finalize payroll through AI.
+
+### Employee AI
+
+Employee can ask about:
+
+- Their own attendance
+- Their own leave balance
+- Their own leave history
+- Their own payslips
+- Company attendance policies
+- Company leave policies
+- Company payroll policies
+
+Employee must not access:
+
+- Other employees' salaries
+- Other employees' attendance
+- Other employees' leave records
+- Company payroll records
+- Admin-only information
+
+If Employee asks:
+
+"What is my colleague's salary?"
+
+AI must politely refuse.
+
+Do not leak information in the refusal.
+
+## AI DATA ACCURACY
+
+AI must only answer database questions using backend tool results.
+
+Do not invent:
+
+- Employee counts
+- Attendance numbers
+- Payroll totals
+- Leave balances
+- Employee information
+
+If the tool returns no data, explain that no matching data is available.
+
+If the answer is unavailable, say so.
+
+## AI DASHBOARD SUMMARY
+
+Admin and HR dashboards must include a Summarize button.
+
+When clicked:
+
+1. Collect current dashboard KPI data.
+2. Send the authorized KPI data to Gemini.
+3. Generate 3–5 concise insight bullets.
+4. Display them in a professional UI.
+5. Clearly label them as AI-generated.
+
+The AI must not invent additional KPI values.
+
+## SMART LEAVE
+
+Implement natural-language leave assistance.
+
+Example:
+
+"I need next Monday and Tuesday off for a wedding."
+
+Gemini should extract:
+
+- Leave type
+- Start date
+- End date
+- Reason
+
+Return validated structured JSON.
+
+Prefill the leave form.
+
+Do not automatically submit the leave.
+
+Employee must confirm the request.
+
+If a date is ambiguous, ask for clarification.
+
+Do not silently choose an incorrect date.
+
+## POLICY Q&A
+
+Store the challenge attendance, leave, and payroll rules in a structured backend policy service.
+
+Gemini must answer policy questions using these rules.
+
+If the requested policy is not available, say that the information is unavailable.
+
+Do not invent company policy.
+
+## AI SAFETY
+
+- Keep Gemini API key on the backend.
+- Implement request timeout of approximately 15 seconds.
+- Implement friendly fallback.
+- Implement request limits around 20 requests per user per hour.
+- Log AI requests in ai_logs.
+- Validate AI JSON output.
+- Retry invalid structured output once.
+- Do not let AI execute arbitrary SQL.
+- Do not let AI execute arbitrary MongoDB queries.
+- Do not allow AI to change user roles.
+- Do not allow AI to bypass authorization.
+- Do not allow AI to finalize payroll.
+- Do not allow AI to approve leave automatically.
+- Do not allow AI to directly save employee data.
+- Do not expose sensitive employee data in logs.
+
+---
+
+# 17. COMMUNICATIONS AND AUDIT — M9
+
+## Announcements
+
+Admin and HR can create announcements.
+
+Fields:
+
+- Title
+- Message
+- Created by
+- Created date
+- Audience
+
+Employee can view announcements.
+
+Implement announcement management.
+
+## Notifications
+
+Create in-app notifications.
+
+Notify employees when:
+
+- Leave is approved.
+- Leave is rejected.
+- Attendance correction is approved.
+- Attendance correction is rejected.
+- Payslip is available.
+
+Implement:
+
+- Notification list
+- Read/unread status
+- Mark as read
+- Notification count
+
+## Audit Logs
+
+Admin can view audit logs.
+
+Record important actions:
+
+- Employee created
+- Employee updated
+- User deactivated
+- Department created
+- Leave approved
+- Leave rejected
+- Attendance correction
+- Payroll created
+- Payroll finalized
+- Company settings changed
+
+Each audit record should include:
+
+- Actor
+- Action
+- Entity
+- Entity ID
+- Timestamp
+- Before state where appropriate
+- After state where appropriate
+
+Audit logs must not be editable or deletable through ordinary application endpoints.
+
+HR cannot view the audit log.
+
+Employee cannot view the audit log.
+
+---
+
+# 18. MONGODB ATLAS DATABASE DESIGN
+
+Use MongoDB Atlas.
+
+Create appropriate Mongoose models.
+
+Recommended collections:
+
+1. users
+2. employees
+3. departments
+4. designations
+5. companySettings
+6. leaveTypes
+7. holidays
+8. attendance
+9. leaveRequests
+10. salaryStructures
+11. payrollRuns
+12. payslips
+13. announcements
+14. notifications
+15. auditLogs
+16. aiLogs
+
+You may add additional collections when necessary.
+
+## DATABASE RULES
+
+- Use ObjectId references.
+- Validate data.
+- Create appropriate indexes.
+- Prevent duplicate employee codes.
+- Prevent duplicate email addresses.
+- Prevent duplicate attendance per employee per day.
+- Prevent duplicate payroll runs for the same company/month.
+- Store timestamps.
+- Store approval history.
+- Store payroll finalization information.
+- Store user role.
+- Store employee ownership.
+- Use database transactions where appropriate and supported.
+
+Do not store fake records.
+
+Do not automatically seed demo data.
+
+Do not create random employee records.
+
+## IMPORTANT
+
+When MongoDB Atlas is not configured:
+
+Show a clear configuration error.
+
+Do not silently switch to local storage.
+
+Do not silently switch to a fake database.
+
+Do not claim database persistence when the database is disconnected.
+
+---
+
+# 19. API DEVELOPMENT
+
+Create a complete REST API.
+
+Recommended endpoint groups:
+
+/api/auth
+
+/api/setup
+
+/api/company
+
+/api/departments
+
+/api/designations
+
+/api/leave-types
+
+/api/holidays
+
+/api/users
+
+/api/employees
+
+/api/attendance
+
+/api/attendance-corrections
+
+/api/leaves
+
+/api/payroll
+
+/api/payslips
+
+/api/dashboard
+
+/api/announcements
+
+/api/notifications
+
+/api/audit
+
+/api/ai
+
+Implement proper HTTP status codes.
+
+Use:
+
+200 for successful requests.
+
+201 for successful creation.
+
+400 for invalid requests.
+
+401 for unauthenticated requests.
+
+403 for forbidden requests.
+
+404 for missing resources.
+
+409 for conflicts.
+
+422 for business-rule validation errors.
+
+429 for rate limiting.
+
+500 for unexpected server errors.
+
+Create a consistent API response structure.
+
+Implement centralized error handling.
+
+Do not expose stack traces in production responses.
+
+Validate every important request.
+
+---
+
+# 20. FRONTEND PAGES
+
+Create the following pages.
+
+## Public
+
+- Login
+- First-run setup
+- Unauthorized
+- Not found
+
+## Admin
+
+- Admin dashboard
+- Company settings
+- Departments
+- Designations
+- Leave types
+- Holidays
+- HR account management
+- Employee directory
+- Employee details
+- Attendance
+- Leave overview
+- Payroll overview
+- Payroll finalization
+- Announcements
+- Audit logs
+- AI assistant
+
+## HR
+
+- HR dashboard
+- Employee directory
+- Add employee
+- Edit employee
+- Employee profile
+- CSV import
+- CSV export
+- Attendance board
+- Attendance corrections
+- Leave approval inbox
+- Salary structure
+- Payroll draft
+- Payroll review
+- Announcements
+- AI assistant
+
+## Employee
+
+- Employee dashboard
+- My attendance
+- Attendance calendar
+- Attendance correction
+- Apply leave
+- Leave history
+- Leave balance
+- My payslips
+- My profile
+- Notifications
+- Announcements
+- AI assistant
+
+All pages must be connected to actual backend endpoints.
+
+Do not create decorative pages without working functionality.
+
+---
+
+# 21. FORMS AND VALIDATION
+
+Use React Hook Form and Zod where appropriate.
+
+Implement validation for:
+
+- Login
+- Password change
+- Company setup
+- Employee registration
+- Employee editing
+- Departments
+- Designations
+- Leave types
+- Holidays
+- Attendance correction
+- Leave request
+- Salary structure
+- Payroll
+
+Display clear validation messages.
+
+Prevent duplicate submissions.
+
+Disable buttons during requests.
+
+Show success and failure notifications.
+
+Handle API validation errors correctly.
+
+---
+
+# 22. SECURITY REQUIREMENTS
+
+Implement:
+
+- Password hashing
+- JWT authentication
+- Role-based access control
+- Employee data-scope validation
+- Server-side validation
+- Rate limiting
+- Secure headers
+- CORS configuration
+- Input sanitization
+- Error handling
+- Secret management
+- Audit logging
+- Secure password reset
+- Protected file downloads
+
+Do not trust frontend role checks.
+
+Do not trust frontend employee IDs.
+
+Do not trust frontend salary values.
+
+Do not trust frontend attendance timestamps.
+
+Do not allow Employee to request another employee's payslip by changing an ID.
+
+Do not allow HR to finalize payroll by directly calling an API.
+
+Do not allow unauthorized access to audit logs.
+
+Protect against common web security vulnerabilities.
+
+---
+
+# 23. OPTIONAL BONUS FEATURES
+
+Implement the following after all required functionalities are complete.
+
+## Camera Attendance
+
+Optional.
+
+Use webcam face detection.
+
+Use browser geolocation.
+
+Admin configures office location and radius.
+
+The backend calculates distance using the Haversine formula.
+
+Reject check-in when:
+
+- No face detected
+- More than one face detected
+- Location outside the configured radius
+- GPS accuracy is worse than 100 meters
+
+Store attendance result.
+
+Do not store full photos unless specifically required.
+
+Clearly inform users about camera and location usage.
+
+## Other Bonus Features
+
+- Attrition risk score
+- Absence anomaly flags
+- Three late arrivals equal to half-day penalty
+- Roman Urdu AI understanding
+- Dark mode
+- PWA
+
+Do not implement bonus features at the expense of required functionality.
+
+---
+
+# 24. TESTING REQUIREMENTS
+
+You must test the application.
+
+Do not only inspect the frontend visually.
+
+Implement automated tests where practical.
+
+Test the following:
+
+## Authentication
+
+- Admin login
+- HR login
+- Employee login
+- Invalid credentials
+- Password hashing
+- Password change
+- Forced first-login password change
+
+## Permissions
+
+- Employee cannot view another employee
+- Employee cannot view another employee salary
+- HR cannot finalize payroll
+- HR cannot access audit logs
+- Employee cannot approve leave
+- Admin can access company-level information
+
+## Employee Management
+
+- Create employee
+- Duplicate email rejection
+- Duplicate employee code rejection
+- Invalid salary rejection
+- Invalid department rejection
+
+## Attendance
+
+- Check-in
+- Check-out
+- Duplicate check-in rejection
+- Late status
+- Half-day status
+- Missing checkout
+- Attendance correction
+- Absent calculation
+
+## Leave
+
+- Leave application
+- Leave balance
+- Overlap rejection
+- Holiday exclusion
+- Weekend exclusion
+- Approval
+- Rejection
+- Cancellation
+
+## Payroll
+
+- Gross calculation
+- Attendance deductions
+- Unpaid leave deductions
+- Half-day deductions
+- Tax
+- Joiner prorating
+- Leaver prorating
+- Payroll finalization
+- Finalized payroll locking
+
+## AI
+
+- Headcount question
+- Attendance question
+- Late-comer question
+- Leave balance question
+- Payroll summary question
+- Employee salary privacy
+- Missing data response
+- Invalid AI output
+- API timeout fallback
+
+## Dashboard
+
+- Empty database
+- Actual employee data
+- Actual attendance
+- Actual leave
+- Actual payroll
+- Department filtering
+- Date filtering
+
+Fix all discovered errors.
+
+---
+
+# 25. PERFORMANCE AND CODE QUALITY
+
+Implement:
+
+- Pagination
+- Server-side search
+- Database indexes
+- Efficient aggregation
+- Reusable services
+- Reusable frontend components
+- TypeScript types
+- Centralized error handling
+- Consistent API structure
+- Clean architecture
+
+Avoid:
+
+- Huge single-file components
+- Repeated business logic
+- Hardcoded data
+- Duplicate API calls
+- Unnecessary database queries
+- Unsafe type casting
+- Unhandled promises
+- Console errors
+- Unused dependencies
+
+Use proper loading and error states.
+
+Make the application maintainable.
+
+---
+
+# 26. RUNNING THE PROJECT
+
+Create root scripts so the application can be started easily.
+
+Required scripts:
+
+npm install
+
+npm run dev
+
+npm run build
+
+npm run start
+
+Configure development mode to run frontend and backend together.
+
+Provide a complete README.
+
+README must include:
+
+- Project overview
+- Technology stack
+- Folder structure
+- Installation
+- MongoDB Atlas configuration
+- Gemini API configuration
+- Environment variables
+- First-run setup
+- Admin creation
+- Development commands
+- Production build
+- Deployment instructions
+- Security notes
+- Implemented features
+- Known limitations
+
+Create `.env.example`.
+
+Do not include real secrets.
+
+If a deployment provider requires credentials or manual configuration, explain it clearly.
+
+Do not claim deployment is complete unless it actually is.
+
+---
+
+# 27. DEVELOPMENT WORKFLOW
+
+Follow this workflow.
+
+## STEP 1 — INSPECT
+
+Inspect the existing project.
+
+Determine:
+
+- Existing frontend
+- Existing backend
+- Existing database connection
+- Existing routes
+- Existing models
+- Existing authentication
+- Existing dependencies
+- Existing errors
+
+Do not delete working code unnecessarily.
+
+If an existing project is provided, improve it instead of blindly replacing everything.
+
+## STEP 2 — PLAN
+
+Create a clear implementation plan.
+
+Map the PDF requirements to:
+
+- Database models
+- Backend services
+- API routes
+- Frontend pages
+- Permissions
+- Testing
+
+Identify missing functionality.
+
+## STEP 3 — IMPLEMENT
+
+Implement the complete backend.
+
+Implement the complete frontend.
+
+Implement the database.
+
+Implement authentication.
+
+Implement every required module.
+
+Implement Gemini AI.
+
+Connect all pages to real API endpoints.
+
+## STEP 4 — VERIFY
+
+Run:
+
+- Dependency installation
+- TypeScript checks
+- Frontend build
+- Backend build
+- Tests
+- Application startup
+
+Fix all errors.
+
+Check for broken imports.
+
+Check for missing environment variables.
+
+Check API connection.
+
+Check database persistence.
+
+## STEP 5 — TEST WORKFLOWS
+
+Verify:
+
+Admin setup → HR creation → Employee registration → Employee login → Attendance → Leave → HR approval → Payroll draft → Admin finalization → Payslip download.
+
+Verify AI answers using the same actual data.
+
+Verify permissions.
+
+## STEP 6 — FINAL REPORT
+
+At completion, provide:
+
+1. What has been implemented.
+2. What is working.
+3. What was tested.
+4. Any remaining limitations.
+5. Exact environment variables required.
+6. Exact commands to start the project.
+7. How to connect MongoDB Atlas.
+8. How to provide Gemini API key.
+9. How to create the first Admin.
+10. How to test the complete application.
+
+Do not report a feature as complete if it is only partially implemented.
+
+---
+
+# 28. IMPORTANT INSTRUCTIONS FOR AI AGENT
+
+You must not stop at a plan.
+
+You must actually implement the project.
+
+Do not give me only code snippets.
+
+Do not tell me to create files manually.
+
+Use the available tools to create and edit files.
+
+If a terminal is available, run commands.
+
+If an error occurs, inspect the error and fix it.
+
+Do not repeatedly ask me whether to continue.
+
+Proceed through the implementation autonomously.
+
+Do not ask unnecessary questions about styling or architecture.
+
+Use reasonable professional defaults.
+
+If an unavoidable configuration is missing, ask only for that specific configuration.
+
+If I provide an existing project, preserve its useful functionality.
+
+If the project has a database problem, diagnose it.
+
+If login fails, inspect authentication, user records, password hashing, JWT, and database connectivity.
+
+If a dashboard shows incorrect numbers, inspect database queries and aggregation.
+
+If AI returns incorrect answers, inspect its tools, permissions, and backend services.
+
+Do not solve errors by hiding them.
+
+Do not solve database problems by replacing real data with dummy data.
+
+Do not solve AI problems by hardcoding answers.
+
+Do not solve permission problems by disabling security.
+
+---
+
+# 29. FINAL ACCEPTANCE CRITERIA
+
+The project is considered complete only when:
+
+- Admin can create the company.
+- Admin can configure company settings.
+- Admin can create HR accounts.
+- HR can register employees.
+- Employee accounts are created correctly.
+- Employees can log in.
+- Employees can change temporary passwords.
+- Employees can check in and check out.
+- Attendance status is calculated correctly.
+- Employees can apply for leave.
+- HR can approve or reject leave.
+- Leave balances are calculated correctly.
+- HR can create payroll drafts.
+- Admin can finalize payroll.
+- Finalized payroll is locked.
+- Employees can download their own payslips.
+- Admin dashboard uses actual company data.
+- HR dashboard uses actual HR data.
+- Employee dashboard uses personal data.
+- Gemini AI answers database questions.
+- Gemini AI respects role permissions.
+- Gemini AI supports smart leave.
+- Gemini AI supports dashboard summaries.
+- Announcements work.
+- Notifications work.
+- Audit logs work.
+- MongoDB Atlas persistence works.
+- The application is responsive.
+- The frontend builds successfully.
+- The backend starts successfully.
+- The README is complete.
+- No required feature is represented by a fake button or hardcoded value.
+
+---
+
+# 30. START NOW
+
+Start by inspecting the existing project and the attached Saylani HCM Lite Challenge Brief.
+
+Use the challenge brief as the primary specification.
+
+Build the complete application according to the requirements above.
+
+Prioritize working full-stack functionality, database correctness, security, professional UI, and AI integration.
+
+I will provide:
+
+1. MongoDB Atlas connection string.
+2. Gemini API key.
+
+Everything else should be implemented by you.
+
+**Do not just explain how to build this project. Build it.**
+
+**Do not stop after creating the frontend.**
+
+**Do not stop after creating the backend.**
+
+**Complete the full-stack application, test it, fix errors, and provide the final working project.**
